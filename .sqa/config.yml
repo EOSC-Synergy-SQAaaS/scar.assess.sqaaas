@@ -1,0 +1,70 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/grycap/scar:
+      branch: master
+      repo: https://github.com/grycap/scar
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/grycap/scar git:
+        commands:
+        - /usr/bin/env sh .sqa/script.paltry-gamboge-albatross.sh
+        container: qc.acc_gamy-buff-cat
+  QC.Doc:
+    repos:
+      github.com/grycap/scar find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gimpy-ecru-scorpion.sh
+        container: qc.doc_muzzy-sepia-walrus
+      github.com/grycap/scar git:
+        commands:
+        - /usr/bin/env sh .sqa/script.lousy-champagne-yak.sh
+        container: qc.doc_sleepy-cerise-tuatara
+      github.com/grycap/scar markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-mauve-ostrich.sh
+        container: qc.doc_cloudy-coral-chameleon
+      github.com/grycap/scar restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-cerulean-saola.sh
+        container: qc.doc_grumpy-olive-caterpillar
+  QC.Lic:
+    repos:
+      github.com/grycap/scar licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-cornflower-tamarin.sh
+        container: qc.lic_thirsty-indigo-sheep
+  QC.Sec:
+    repos:
+      github.com/grycap/scar bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.ugly-magnolia-dogfish.sh
+        container: qc.sec_droopy-asparagus-catfish
+  QC.Sty:
+    repos:
+      github.com/grycap/scar flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-seashell-foxhound.sh
+        container: qc.sty_slaphappy-saffron-dachshund
+      github.com/grycap/scar hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-corn-deer.sh
+        container: qc.sty_gloppy-tomato-devil
+      github.com/grycap/scar jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.homely-periwinkle-skunk.sh
+        container: qc.sty_tacky-apricot-stingray
+  QC.Ver:
+    repos:
+      github.com/grycap/scar get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.dorky-amethyst-owl.sh
+        container: qc.ver_bluesy-magnolia-lizard
+timeout: 1800
